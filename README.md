@@ -15,7 +15,7 @@ This will reveal the following ports on your host:
 - 6379 - Redis 
 
 There are the following test accounts (email / password):
-- Screener: maxi-screening@example.org / 🔑
+- Screener: maxi-screening@example.org / screener
 - Student: leon-jackson@t-online.de / authtokenS1
 - Student: mel-98@gmail.com / authtokenS2
 - Pupil: max@gamil.com / authtokenP1

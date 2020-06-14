@@ -1,0 +1,25 @@
+FROM node:10
+
+# Copy dependency files, as only changes to them will trigger reinstalls
+COPY ./backend-screening/package.json ./package.json
+
+# There are some global dependencies:
+RUN npm install react-scripts react-app-rewired typescript --global
+
+RUN npm install
+
+# Hopefully cache images till this point
+
+# Copy sources
+COPY ./backend-screening ./
+
+# Set up environment configuration files
+COPY ./dev-env/backend-screening.env ./.env
+
+
+# TODO: Seperate build / run stage
+
+# Screening Backend
+EXPOSE 3001
+
+CMD npm run dev

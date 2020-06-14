@@ -1,0 +1,51 @@
+version: "3.3"
+services:
+  backend:
+    build:
+      context: ../
+      dockerfile: ./dev-env/Dockerfile-Backend
+    ports:
+      - "5000:3000"
+    depends_on: 
+      - postgres
+
+  screening-backend:
+    build:
+      context: ../
+      dockerfile: ./dev-env/Dockerfile-BackendScreening
+    ports:
+      - "3001:3001"
+    depends_on: 
+      - postgres
+      - redis
+
+  web-screening-admin:
+    build:
+      context: ../
+      dockerfile: ./dev-env/Dockerfile-WebScreeningAdmin
+    ports:
+      - "4001:80"
+    depends_on: 
+      - screening-backend
+
+  web-screening-app:
+    build:
+      context: ../
+      dockerfile: ./dev-env/Dockerfile-WebScreeningApp
+    ports:
+      - "4002:80"
+    depends_on: 
+      - screening-backend
+    stdin_open: true # Fix for react scripts running wild, see https://stackoverflow.com/questions/60895246/react-app-exiting-in-docker-container-with-exit-code-0
+  postgres:
+    image: postgres
+    environment: 
+      POSTGRES_USER: "dev_corona_school"
+      POSTGRES_PASSWORD: "test"
+      POSTGRES_DB: "dev_corona_school"
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--bind", "redis", "--port", "6379"]

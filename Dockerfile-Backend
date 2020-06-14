@@ -1,0 +1,26 @@
+FROM node:10
+
+# Copy dependency files, as only changes to them will trigger reinstalls
+COPY ./backend/package.json  ./package.json
+
+# There are some global dependencies:
+# Newer versions of TS fail to build, therefore pinning old version
+RUN npm install react-scripts react-app-rewired typescript --global
+
+RUN npm install
+
+# Hopefully cache images till this point
+
+# Copy sources
+COPY ./backend  ./
+
+# Set up environment configuration files
+COPY ./dev-env/backend.env ./.env
+
+
+# TODO: Seperate build / run stage
+
+# Backend
+EXPOSE 5000
+
+CMD npm run build:clean && npm run web:dev

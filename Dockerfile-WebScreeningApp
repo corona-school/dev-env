@@ -2,11 +2,12 @@ FROM node:10
 
 # Copy dependency files, as only changes to them will trigger reinstalls
 COPY ./web-screening-app/package.json ./package.json
+COPY ./web-screening-app/yarn.lock ./yarn.lock
 
-# There are some global dependencies:
-RUN npm install react-scripts react-app-rewired typescript --global
+# Install Yarn
+RUN curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --rc
 
-RUN npm install
+RUN yarn install
 
 # Hopefully cache images till this point
 

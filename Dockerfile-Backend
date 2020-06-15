@@ -2,12 +2,12 @@ FROM node:10
 
 # Copy dependency files, as only changes to them will trigger reinstalls
 COPY ./backend/package.json  ./package.json
+COPY ./backend/package-lock.json ./package-lock.json
 
 # There are some global dependencies:
-# Newer versions of TS fail to build, therefore pinning old version
 RUN npm install react-scripts react-app-rewired typescript --global
 
-RUN npm install
+RUN npm ci
 
 # Hopefully cache images till this point
 

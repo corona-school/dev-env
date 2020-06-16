@@ -5,7 +5,7 @@ services:
       context: ../
       dockerfile: ./dev-env/Dockerfile-Backend
     ports:
-      - "5000:3000"
+      - "3000:5000"
     depends_on: 
       - postgres
 

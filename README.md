@@ -13,6 +13,7 @@ This will reveal the following ports on your host:
 - 3000 - The Backend
 - 3001 - The Screening Backend
 - 6379 - Redis 
+- 5432 - PostgreSQL (username: dev_corona_school password: test)
 
 There are the following test accounts (email / password):
 - Screener: maxi-screening@example.org / screener

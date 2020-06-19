@@ -5,7 +5,7 @@ services:
       context: ../
       dockerfile: ./dev-env/Dockerfile-Backend
     ports:
-      - "3000:5000"
+      - "5000:5000"
     depends_on: 
       - postgres
 
@@ -24,7 +24,7 @@ services:
       context: ../
       dockerfile: ./dev-env/Dockerfile-WebScreeningAdmin
     ports:
-      - "4001:80"
+      - "3000:80"
     depends_on: 
       - screening-backend
 
@@ -33,7 +33,7 @@ services:
       context: ../
       dockerfile: ./dev-env/Dockerfile-WebScreeningApp
     ports:
-      - "4002:80"
+      - "3002:80"
     depends_on: 
       - screening-backend
     stdin_open: true # Fix for react scripts running wild, see https://stackoverflow.com/questions/60895246/react-app-exiting-in-docker-container-with-exit-code-0

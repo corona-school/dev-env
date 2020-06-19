@@ -8,9 +8,9 @@ To set up, clone this repository (`dev-env`) into the same folder as all the oth
 You might want to disable CORS in your browser to make the webapps work.
 
 This will reveal the following ports on your host:
-- 4001 - The Screening Admin
-- 4002 - The Screening App
-- 3000 - The Backend
+- 3000 - The Screening Admin
+- 3002 - The Screening App
+- 5000 - The Backend
 - 3001 - The Screening Backend
 - 6379 - Redis 
 - 5432 - PostgreSQL (username: dev_corona_school password: test)

@@ -1,0 +1,26 @@
+FROM corona-school-base
+
+# Copy dependency files, as only changes to them will trigger reinstalls
+COPY ./web-user-app/package.json ./package.json
+COPY ./web-user-app/yarn.lock ./yarn.lock
+
+# Install Yarn
+RUN curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --rc
+RUN export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH" && yarn install
+
+# Hopefully cache images till this point
+
+# Copy sources
+COPY ./web-user-app/ ./
+
+# Set up environment configuration files
+COPY ./dev-env/web-user-app.env ./.env
+
+RUN npm run build
+
+# TODO: Seperate build / run stage
+
+# App Web
+EXPOSE 80
+
+CMD node -r dotenv/config server.js

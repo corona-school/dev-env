@@ -1,0 +1,9 @@
+# As we're a startup we can fancy to use new shiny C++20 features
+# However as NodeJS is lacking an official image that also has a recent gcc version
+# seems I have to maintain my own base node image
+FROM alpine:3.12
+
+# Sorted decreasing by probability of update, so that layers can be reused
+RUN apk add curl python3 g++ make bash
+RUN apk add nodejs
+RUN apk add npm

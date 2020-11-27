@@ -1,4 +1,4 @@
-FROM node:10
+FROM corona-school-base
 
 # Copy dependency files, as only changes to them will trigger reinstalls
 COPY ./web-screening-app/package.json ./package.json
@@ -7,7 +7,7 @@ COPY ./web-screening-app/yarn.lock ./yarn.lock
 # Install Yarn
 RUN curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --rc
 
-RUN yarn install
+RUN export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH" && yarn install
 
 # Hopefully cache images till this point
 

@@ -1,5 +1,11 @@
 version: "3.3"
 services:
+  base:
+    image: corona-school-base
+    build: 
+      context: ./
+      dockerfile: ./Dockerfile-Base
+
   backend:
     build:
       context: ../
@@ -8,6 +14,7 @@ services:
       - "5000:5000"
     depends_on: 
       - postgres
+      - base
 
   screening-backend:
     build:
@@ -18,6 +25,7 @@ services:
     depends_on: 
       - postgres
       - redis
+      - base
 
   web-screening-admin:
     build:
@@ -27,6 +35,7 @@ services:
       - "3000:80"
     depends_on: 
       - screening-backend
+      - base
 
   web-screening-app:
     build:
@@ -36,7 +45,18 @@ services:
       - "3002:80"
     depends_on: 
       - screening-backend
+      - base
     stdin_open: true # Fix for react scripts running wild, see https://stackoverflow.com/questions/60895246/react-app-exiting-in-docker-container-with-exit-code-0
+
+  web-user-app:
+    build:
+      context: ../
+      dockerfile: ./dev-env/Dockerfile-WebUserApp 
+    ports:
+     - "3000:80"
+    depends_on:
+     - backend
+     - base
   postgres:
     image: postgres
     ports:

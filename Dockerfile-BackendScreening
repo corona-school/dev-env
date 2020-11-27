@@ -1,4 +1,4 @@
-FROM node:10
+FROM corona-school-base
 
 # Copy dependency files, as only changes to them will trigger reinstalls
 COPY ./backend-screening/package.json ./package.json

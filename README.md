@@ -24,3 +24,6 @@ There are the following test accounts (email / password):
 - Student: mel-98@gmail.com / authtokenS2
 - Pupil: max@gamil.com / authtokenP1
 - Pupil: müller@hotmail.de / authtokenP2
+
+To log in into the user section use http://localhost:3000/login?token=[user password here]
+

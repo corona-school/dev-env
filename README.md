@@ -3,7 +3,7 @@
 A zoo of Docker containers that contains all backends and frontends,
 as well as a Docker Compose config which additionally sets up redis and postgres.
 
-To set up, clone this repository (`dev-env`) into the same folder as all the other repositories (`backend`, `backend-screening`, `web-screening-app`, `web-screening-admin`). Then install docker and run `docker-compose up` in this folder. To rebuild, use `docker-compose build`, then run up again. Don't worry, the first run will take quite a while, but further ones will be significantly faster (as most steps can be cached).
+To set up, clone this repository (`dev-env`) into the same folder as all the other repositories (`backend`, `backend-screening`, `web-screening-app`, `web-screening-admin`). Copy the .dockerignore file into the parent directory `cp /root/dev-env/.dockerignore /root/.dockerignore`. Then install docker and run `docker-compose up` in this folder. To rebuild, use `docker-compose build`, then run up again. Don't worry, the first run will take quite a while, but further ones will be significantly faster (as most steps can be cached).
 
 You can also only build / start parts of the landscape e.g. `docker-compose build backend && docker-compose up web-user-app` to rebuild the backend and start the user frontend on top of it.
 

@@ -8,14 +8,14 @@ COPY ./backend/package-lock.json ./package-lock.json
 # There are some global dependencies:
 RUN npm install typescript --global
 
+COPY ./backend/package.json ./
+COPY ./backend/package-lock.json ./
 
-
-# Hopefully cache images till this point
-
-# Copy sources
-COPY ./backend  ./
 
 RUN npm ci # unfortunately installation has to happen here, as Linux binaries break otherwise (bcrypt native module)
+
+## Copy sources
+COPY ./backend  ./
 
 # Set up environment configuration files
 COPY ./dev-env/backend.env ./.env

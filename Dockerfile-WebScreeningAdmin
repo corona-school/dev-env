@@ -1,15 +1,17 @@
 FROM corona-school-base
 
+# Install Yarn
+RUN curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --rc
+
+
+
 # Copy dependency files, as only changes to them will trigger reinstalls
 COPY ./web-screening-admin/package.json ./package.json
 COPY ./web-screening-admin/yarn.lock ./yarn.lock
 
-# Install Yarn
-RUN curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --rc
-
 RUN export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH" && yarn install
 
-# Hopefully cache images till this point
+#  Hopefully cache images till this point
 
 # Copy sources
 COPY ./web-screening-admin ./
@@ -17,12 +19,10 @@ COPY ./web-screening-admin ./
 # Set up environment configuration files
 COPY ./dev-env/web-screening-admin.env ./.env
 
-
-
-# TODO: Seperate build / run stage
+RUN npm run build
 
 # Admin Web:
 EXPOSE 80
 
 
-CMD npm run dev
+CMD npm run start

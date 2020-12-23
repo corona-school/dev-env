@@ -21,10 +21,9 @@ COPY ./backend-screening ./
 # Set up environment configuration files
 COPY ./dev-env/backend-screening.env ./.env
 
-
-# TODO: Seperate build / run stage
+RUN npm run build-ts
 
 # Screening Backend
 EXPOSE 3001
 
-CMD npm run dev
+CMD npm run start

@@ -72,3 +72,5 @@ There are the following test accounts (email / password):
 
 To log in into the user section use http://localhost:3000/login?token=[user password here]
 
+PS: user password here: without brackets.  
+
